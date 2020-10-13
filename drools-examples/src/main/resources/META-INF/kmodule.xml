@@ -155,4 +155,10 @@
     <kbase name="TroubleTicketWithDTKB" packages="org.drools.examples.troubleticketWithDT">
         <ksession name="TroubleTicketWithDTKS"/>
     </kbase>
+    <kbase name="testRule" packages="org.drools.match">
+        <ruleTemplate dtable="org/drools/match/overTime.xls"
+                      template="org/drools/match/overTime.drt"
+                      row="2" col="2"/>
+        <ksession name="testRule"/>
+    </kbase>
 </kmodule>

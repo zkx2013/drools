@@ -51,11 +51,13 @@ public class DecisionTableProviderImpl
         ExternalSpreadsheetCompiler converter = new ExternalSpreadsheetCompiler();
         for ( RuleTemplateConfiguration template : configuration.getRuleTemplateConfigurations() ) {
             try {
-                drls.add(converter.compile(resource.getInputStream(),
-                                           template.getTemplate().getInputStream(),
-                                           InputType.getInputTypeFromDecisionTableInputType(configuration.getInputType()),
-                                           template.getRow(),
-                                           template.getCol()));
+                String drl = converter.compile(resource.getInputStream(),
+                        template.getTemplate().getInputStream(),
+                        InputType.getInputTypeFromDecisionTableInputType(configuration.getInputType()),
+                        template.getRow(),
+                        template.getCol());
+                drls.add(drl);
+                logger.info("[loadFromInputStreamWithTemplates] 添加规则信息为{}",drl);
             } catch (IOException e) {
                 logger.error( "Cannot open " + template.getTemplate(), e );
             }

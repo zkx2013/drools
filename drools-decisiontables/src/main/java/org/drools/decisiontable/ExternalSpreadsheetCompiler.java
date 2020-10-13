@@ -32,6 +32,9 @@ import org.drools.template.parser.TemplateDataListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 将excel文件解析为规则
+ */
 public class ExternalSpreadsheetCompiler {
 
     protected static final transient Logger logger = LoggerFactory.getLogger(ExternalSpreadsheetCompiler.class);
@@ -89,13 +92,25 @@ public class ExternalSpreadsheetCompiler {
                         startCol );
     }
 
+    /**
+     * 将excel编译成规则文件
+     * @param xlsStream excel地址
+     * @param templateStream rule template 文件地址
+     * @param type 输入的文件类型(支持的文件类型为CSV,XLS,XLSX)
+     * @param startRow 开始的行号
+     * @param startCol 开始的列号
+     * @return
+     */
     public String compile(final InputStream xlsStream,
                           final InputStream templateStream,
                           InputType type,
                           int startRow,
                           int startCol) {
+        //解析rule template 文件,激昂rule template 解析为模版对象
         TemplateContainer tc = new DefaultTemplateContainer( templateStream );
+        //关闭rule template 文件的流文件
         closeStream( templateStream );
+        //解析excel文件
         return compile( xlsStream,
                         type,
                         new TemplateDataListener( startRow,
@@ -159,6 +174,8 @@ public class ExternalSpreadsheetCompiler {
      * @param listener
      * @return DRL xml, ready for use in drools.
      * @throws IOException
+     *
+     * 生成DRL文件
      */
     public String compile(final InputStream xlsStream,
                           final InputType type,

@@ -22,6 +22,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lombok.extern.slf4j.Slf4j;
+import org.drools.core.util.JsonUtils;
 import org.mvel2.integration.VariableResolverFactory;
 import org.mvel2.integration.impl.MapVariableResolverFactory;
 import org.mvel2.templates.CompiledTemplate;
@@ -33,6 +35,7 @@ import org.mvel2.templates.TemplateRuntime;
 /**
  * Generate the rules for a decision table row from a rule template.
  */
+@Slf4j
 public class DefaultGenerator
         implements
         Generator {
@@ -56,7 +59,9 @@ public class DefaultGenerator
     public void generate( String templateName,
                           Row row ) {
         try {
+            log.debug("[generate]生成规则信息,templateName = {} ",templateName);
             CompiledTemplate template = getTemplate( templateName );
+            log.debug("[generate]生成规则信息,CompiledTemplate = {} ",JsonUtils.toJSON(template));
             VariableResolverFactory factory = new MapVariableResolverFactory();
             Map<String, Object> vars = new HashMap<String, Object>();
 
@@ -99,6 +104,7 @@ public class DefaultGenerator
         CompiledTemplate contents;
         if ( !registry.contains( templateName ) ) {
             RuleTemplate template = ruleTemplates.get( templateName );
+
             contents = TemplateCompiler.compileTemplate( template.getContents() );
             registry.addNamedTemplate( templateName,
                                        contents );
