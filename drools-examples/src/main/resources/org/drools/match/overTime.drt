@@ -15,10 +15,9 @@ template "overTime"
 
 rule "Over time_@{row.rowNumber}"
     when
-        RuleParam(overTime==0)
-        info:Info(gender == "@{gender}",lang == "@{lang}")
+        ruleParam:RuleParam(overTime==0)
+        info:Info(gender == @{gender},lang == "@{lang}")
     then
-        // System.out.println(matchTeamInfo);
         System.out.println("测试代码");
 end
 end template

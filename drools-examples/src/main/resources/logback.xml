@@ -9,6 +9,7 @@
 
   <logger name="org.kie" level="debug"/>
   <logger name="org.drools" level="debug"/>
+  <logger name="root" level="debug"/>
 
   <root level="debug">
     <appender-ref ref="consoleAppender" />

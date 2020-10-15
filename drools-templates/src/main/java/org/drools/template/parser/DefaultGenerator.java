@@ -61,7 +61,7 @@ public class DefaultGenerator
         try {
             log.debug("[generate]生成规则信息,templateName = {} ",templateName);
             CompiledTemplate template = getTemplate( templateName );
-            log.debug("[generate]生成规则信息,CompiledTemplate = {} ",JsonUtils.toJSON(template));
+            log.debug("[generate]生成规则信息,CompiledTemplate = {} ,registry = {}",JsonUtils.toJSON(template),JsonUtils.toJSON(registry));
             VariableResolverFactory factory = new MapVariableResolverFactory();
             Map<String, Object> vars = new HashMap<String, Object>();
 

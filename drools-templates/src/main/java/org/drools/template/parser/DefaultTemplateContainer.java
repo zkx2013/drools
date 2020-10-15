@@ -39,7 +39,9 @@ public class DefaultTemplateContainer implements TemplateContainer {
     private List<Column> columns = new ArrayList<Column>();
 
     private Map<String, RuleTemplate> templates = new HashMap<String, RuleTemplate>();
-
+    /**
+     * 替换空行
+     */
     private boolean replaceOptionals;
 
     public DefaultTemplateContainer(final String template) {
